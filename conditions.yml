@@ -1,0 +1,17 @@
+---
+- name: "Conditions"
+  hosts: dev
+  become: yes
+  vars:
+    packages: [samba, samba-common]
+  tasks:
+    - name: "Update cache"
+      when: ansible_os_family == "Debian"
+      apt:
+        update_cache: yes
+    - name: "Install SAMBA"
+      when: ansible_os_family == "Debian"
+      apt:
+        name: "{{ packages }}"
+        state: latest
+      with_items: "{{ packages  }}"

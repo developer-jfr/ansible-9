@@ -1,0 +1,9 @@
+---
+  - name: "Homework Ansible"
+    hosts: all
+    become: yes
+    serial: 1
+    tasks:
+      - name: "Reboot machine using a custom reboot command"
+        ansible.builtin.reboot:
+          reboot_command: reboot

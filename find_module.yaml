@@ -1,0 +1,9 @@
+---
+  - name: "Find Module"
+    hosts: localhost
+    become: yes
+    tasks:
+    - name: Find Module Task
+      find:
+        path: /home/ubuntu/ansible-playbooks
+        file_type: file

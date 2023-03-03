@@ -1,0 +1,32 @@
+---
+  - name: "Homework Ansible"
+    hosts: all
+    become: yes
+    serial: 1
+    tasks:
+      - name: "Update cache"
+        apt:
+          update_cache: yes
+      - name: "Install nginx"
+        apt:
+          name: nginx
+          state: latest
+      - name: "Create DevXer  User"
+        ansible.builtin.user:
+          name: devxer
+          shell: /bin/bash
+          uid: 1044
+          createhome: yes     
+          home: /home/devxer      
+      - name: "Copy file with owner and permission, using symbolic representation"
+        ansible.builtin.copy:
+          src: /home/ubuntu/ansible-playbooks/1devx_file
+          dest: /tmp
+          owner: devxer
+          group: devxer
+          mode: u=rw,g=r,o=r
+      - name: "Check that uri is response"
+        ansible.builtin.uri:
+          url: https://wnu.org/gnu/gnu.html
+          return_content: true
+

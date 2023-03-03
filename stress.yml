@@ -1,0 +1,13 @@
+---
+  - name: Install Stress
+    hosts: all
+    become: yes
+    serial: 1
+    tasks:
+      - name: reachibilty of server
+        ping:
+      - name: install stress
+        ansible.builtin.package:
+          name: stress
+          update_cache: yes
+          state: latest 
